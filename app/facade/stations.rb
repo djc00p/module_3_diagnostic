@@ -1,8 +1,11 @@
 class StationFacade < ApplicationRecord
 
   def initialize(attribute)
+    # access is if its PUBLIC
     @access = attribute[:access_code]
+    # is gonna be E85,ELEC
     @fuel_type = attribute[:fuel_type_code]
+    # what ever zip we enter
     @zip = attribute[:zip]
   end
 
