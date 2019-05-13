@@ -1,11 +1,9 @@
 class StationFacade < ApplicationRecord
 
-  def initialize(station_name, access_code, fuel_type)
-    @station_name = station_name
-    @access = access
-    @fuel_type = fuel_type
-    @zip = zip
-    @station_name = station_name
+  def initialize(attribute)
+    @access = attribute[:access_code]
+    @fuel_type = attribute[:fuel_type_code]
+    @zip = attribute[:zip]
   end
 
   def stations
@@ -14,5 +12,7 @@ class StationFacade < ApplicationRecord
     conn.adapter = conn.default_adapter
 
     response = conn.get("/#{@fuel_type}/#{@zip}/#{@access}")
+
+    data = JSON.parse(response.body)
   end
 end
