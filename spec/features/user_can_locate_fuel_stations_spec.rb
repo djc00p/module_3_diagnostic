@@ -14,12 +14,7 @@ describe "As a user" do
 
     # Then I should be on page "/search"
     expect(current_path).to eq("/search")
-    test = Faraday.new do |builder|
-      builder.adapter :test, stubs do |stub|
-        stub.get('/ebi') { |env| [ 200, {}, 'shrimp' ]}
-      end
-    end
-    response =
+    
 
     expect(total_results).to eq(90)
   end

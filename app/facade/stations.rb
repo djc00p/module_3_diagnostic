@@ -10,7 +10,7 @@ class StationFacade < ApplicationRecord
 
   def stations
     conn = Faraday.new("https://developer.nrel.gov/api/alt-fuel-stations/v1.json")
-    conn.params['api_key'] = 'KRiS0d4fdjT4bhU0Sy1LYV6ne1w1oC47fgkfnvwy'
+    conn.params['api_key'] = ENV['API_KEY']
     conn.adapter = conn.default_adapter
 
     response = conn.get("/#{@fuel_type}/#{@zip}/#{@access}")
