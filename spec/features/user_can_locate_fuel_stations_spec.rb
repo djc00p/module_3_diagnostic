@@ -6,21 +6,23 @@ describe "As a user" do
   it "should see the total results of the stations " do
     visit "/"
 
+    # And I fill in the search form with 80206 (Note: Use the existing search form)
     fill_in "q",  with: 80206
 
+    # And I click "Locate"
     click_on "Locate"
-  end
-  # And I fill in the search form with 80206 (Note: Use the existing search form)
 
-  # And I click "Locate"
-  # click_on "Locate"
-  #
-  # # Then I should be on page "/search"
-  # expect(current_path).to eq("/search")
-  #
-  # # Then I should see the total results of the stations that match my query, 90.
-  # expect(total_results).to eq(90)
-  #
+    # Then I should be on page "/search"
+    expect(current_path).to eq("/search")
+    test = Faraday.new do |builder|
+      builder.adapter :test, stubs do |stub|
+        stub.get('/ebi') { |env| [ 200, {}, 'shrimp' ]}
+      end
+    end
+    response =
+
+    expect(total_results).to eq(90)
+  end
   # # Then I should see a list of the 15 closest stations within 5 miles sorted by distance
   #
   # within "#15closestsatations" do
